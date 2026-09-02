@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ec_ats_wizard_form" model="ir.ui.view">
+        <field name="name">ec.ats.wizard.form</field>
+        <field name="model">ec.ats.wizard</field>
+        <field name="arch" type="xml">
+            <form string="ATS - Parámetros de generación">
+                <group string="Empresa y período">
+                    <group>
+                        <field name="company_id"/>
+                        <field name="tipo_periodo" widget="radio"/>
+                        <field name="anio"/>
+                        <field name="mes"
+                               invisible="tipo_periodo != 'mensual'"
+                               required="tipo_periodo == 'mensual'"/>
+                    </group>
+                    <group>
+                        <field name="fecha_desde" readonly="1"/>
+                        <field name="fecha_hasta" readonly="1"/>
+                    </group>
+                </group>
+
+                <group string="Opciones">
+                    <field name="include_electronic"/>
+                </group>
+
+                <footer>
+                    <button name="action_generar" string="Generar vista"
+                            type="object" class="btn-primary"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ec_ats_wizard_result_form" model="ir.ui.view">
+        <field name="name">ec.ats.wizard.result.form</field>
+        <field name="model">ec.ats.wizard</field>
+        <field name="arch" type="xml">
+            <form string="ATS - Resultado">
+                <group>
+                    <field name="estado" readonly="1" widget="text" invisible="not estado"/>
+                </group>
+
+                <group string="Vista previa en pantalla"
+                       invisible="not vista_previa_html">
+                    <field name="vista_previa_html" widget="html" readonly="1"/>
+                </group>
+
+                <group string="Exportar archivos">
+                    <button name="action_exportar_xml" string="Generar XML" type="object" class="btn-primary"/>
+                    <button name="action_exportar_xlsx" string="Generar XLSX" type="object" class="btn-secondary"/>
+                    <button name="action_exportar_ambos" string="Generar XML + XLSX" type="object" class="btn-secondary"/>
+                </group>
+
+                <group string="Descargar XML (DIMM)"
+                       invisible="not archivo_xml_datos">
+                    <field name="archivo_xml_nombre" readonly="1"/>
+                    <field name="archivo_xml_datos" filename="archivo_xml_nombre"
+                           widget="binary" readonly="1"/>
+                </group>
+
+                <group string="Descargar Excel"
+                       invisible="not archivo_xlsx_datos">
+                    <field name="archivo_xlsx_nombre" readonly="1"/>
+                    <field name="archivo_xlsx_datos" filename="archivo_xlsx_nombre"
+                           widget="binary" readonly="1"/>
+                </group>
+
+                <footer>
+                    <button name="action_generar" string="Regenerar vista" type="object" class="btn-secondary"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ec_ats_wizard" model="ir.actions.act_window">
+        <field name="name">ATS - Anexo Transaccional Simplificado</field>
+        <field name="res_model">ec.ats.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_ec_ats_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

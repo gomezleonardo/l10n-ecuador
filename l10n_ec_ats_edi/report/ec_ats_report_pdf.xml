@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ec_ats_report_pdf_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>ATS - Anexo Transaccional</h2>
+                        <p>
+                            <strong>Ejecución:</strong>
+                            <span t-field="o.name"/>
+                        </p>
+                        <p>
+                            <strong>Empresa:</strong>
+                            <span t-field="o.company_id"/>
+                        </p>
+                        <p>
+                            <strong>Desde:</strong>
+                            <span t-field="o.fecha_desde"/>
+                            <strong style="margin-left: 12px;">Hasta:</strong>
+                            <span t-field="o.fecha_hasta"/>
+                        </p>
+                        <p t-if="o.generated_at">
+                            <strong>Generado en:</strong>
+                            <span t-field="o.generated_at"/>
+                        </p>
+                        <div t-field="o.vista_previa_html"/>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_ec_ats_run_pdf" model="ir.actions.report">
+        <field name="name">ATS - PDF</field>
+        <field name="model">ec.ats.report.run</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">l10n_ec_ats_edi.ec_ats_report_pdf_template</field>
+        <field name="report_file">l10n_ec_ats_edi.ec_ats_report_pdf_template</field>
+        <field name="print_report_name">'ATS - %s' % (object.name or '')</field>
+        <field name="binding_model_id" ref="model_ec_ats_report_run"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

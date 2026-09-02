@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ec_ats_wizard_user,ec.ats.wizard.user,model_ec_ats_wizard,account.group_account_user,1,1,1,1
+access_ec_ats_wizard_manager,ec.ats.wizard.manager,model_ec_ats_wizard,account.group_account_manager,1,1,1,1
+access_ec_ats_report,ec.ats.report,model_ec_ats_report,account.group_account_user,1,0,0,0
+access_ec_ats_report_invoice,ec.ats.report.invoice,model_ec_ats_report,account.group_account_invoice,1,0,0,0
+access_ec_ats_report_readonly,ec.ats.report.readonly,model_ec_ats_report,account.group_account_readonly,1,0,0,0
+access_ec_ats_report_run_user,ec.ats.report.run.user,model_ec_ats_report_run,account.group_account_user,1,1,1,1
+access_ec_ats_report_run_manager,ec.ats.report.run.manager,model_ec_ats_report_run,account.group_account_manager,1,1,1,1
+access_ec_ats_report_run_invoice,ec.ats.report.run.invoice,model_ec_ats_report_run,account.group_account_invoice,1,1,1,1
+access_ec_ats_report_run_readonly,ec.ats.report.run.readonly,model_ec_ats_report_run,account.group_account_readonly,1,0,0,0
